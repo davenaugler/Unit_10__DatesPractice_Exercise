@@ -17,39 +17,32 @@ public class WorldClockApplication {
 	private final static ZoneId DUBLIN = ZoneId.of("Europe/Dublin");
 
 	public static void main(String[] args) {
-//		System.out.println(CANADA);
-//		System.out.println(BRISBANE);
-//		System.out.println(DUBLIN);
 
 		// [1] first we need to capture what the time is at this exact moment...
-		ZonedDateTime zonedDateTimeCanada = ZonedDateTime.now();
-		ZonedDateTime zonedDateTimeBrisbane = ZonedDateTime.now();
-		ZonedDateTime zonedDateTimeDublin = ZonedDateTime.now();
+		ZonedDateTime zonedDateTimeCanada = ZonedDateTime.now(CANADA);
+		ZonedDateTime zonedDateTimeBrisbane = ZonedDateTime.now(BRISBANE);
+		ZonedDateTime zonedDateTimeDublin = ZonedDateTime.now(DUBLIN);
 		
 		// [2] from here you will need to create three system outs to print out the times and dates
+		System.out.println("Time in Brisbane: " + zonedDateTimeBrisbane);
+		System.out.println("Time in Dublin: " + zonedDateTimeDublin);
+		System.out.println("Time in Canada: " + zonedDateTimeCanada);
 		
-		// ZonedDateTime has a method called withZoneSameInstant(<ZoneId>) which gives you the exact date time in the
-		// time zone you put in using the zone id.  Try putting in zonedDateTime.withZoneSameInstant(BRISBANE)...
-		zonedDateTimeCanada = zonedDateTimeCanada.withZoneSameInstant(CANADA);
-		zonedDateTimeBrisbane = zonedDateTimeBrisbane.withZoneSameInstant(BRISBANE);
-		zonedDateTimeDublin = zonedDateTimeDublin.withZoneSameInstant(DUBLIN);
-		
-		System.out.println(zonedDateTimeBrisbane);
-		System.out.println(zonedDateTimeDublin);
-		System.out.println(zonedDateTimeCanada);
+		// For Fun
+//		System.out.println("");
+//		System.out.println(CANADA + " -> "+ zonedDateTimeCanada.format(DateTimeFormatter.ofPattern("yyyy-MM-dd h:mm a - z")));
+//		System.out.println(BRISBANE + " -> "+ zonedDateTimeBrisbane.format(DateTimeFormatter.ofPattern("yyyy-MM-dd h:mm a - z")));
+//		System.out.println(DUBLIN + " -> "+ zonedDateTimeDublin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd h:mm a - z")));
 		
 		// [3] After we grabbed the time in our country, we need to format the output using our DateTimeFormatter...
-		System.out.println("");
-		System.out.println(CANADA + " -> "+ zonedDateTimeCanada.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a - z")));
-		System.out.println(BRISBANE + " -> "+ zonedDateTimeBrisbane.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a - z")));
-		System.out.println(DUBLIN + " -> "+ zonedDateTimeDublin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm a - z")));
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 		
 		// [4] We need to format it in a way that is easily readable, for this assignment, use FormatStyle.MEDIUM
 		// ... .format(DateTimeFormatter.ofLocalizedDateTIme(FormatStyle.MEDIUM));
 		System.out.println("");
-		System.out.println("Toronto, Canada" +  " -> "+ zonedDateTimeCanada.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
-		System.out.println("Brisbane, Australia" +  " -> "+ zonedDateTimeBrisbane.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
-		System.out.println("Dublin, Ireland" +  " -> "+ zonedDateTimeDublin.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+		System.out.println("Toronto, Canada" +  " -> "+ zonedDateTimeCanada.format(dateTimeFormatter));
+		System.out.println("Brisbane, Australia" +  " -> "+ zonedDateTimeBrisbane.format(dateTimeFormatter));
+		System.out.println("Dublin, Ireland" +  " -> "+ zonedDateTimeDublin.format(dateTimeFormatter));
 	}
 
 }
